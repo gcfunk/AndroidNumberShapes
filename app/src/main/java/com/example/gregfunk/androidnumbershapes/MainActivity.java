@@ -4,8 +4,51 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
+
+    public class Number {
+        int number;
+
+        public boolean isTriangular() {
+            int x = 1;
+            int triangularNumber = 1;
+
+            while (triangularNumber < number) {
+                x++;
+                triangularNumber += x;
+            }
+
+            return (triangularNumber == number);
+        }
+
+        public boolean isSquare() {
+            Double sqrt = Math.sqrt(number);
+            return (Math.floor(sqrt) == sqrt);
+        }
+    }
+
+    public void testNumber(View view) {
+        EditText userNumber = (EditText) findViewById(R.id.userNumber);
+
+        Number num = new Number();
+        num.number = Integer.parseInt(userNumber.getText().toString());
+
+        String message = "";
+        if (num.isTriangular() && num.isSquare()) {
+            message = "Both a square and a triangular number";
+        } else if (num.isTriangular()) {
+            message = "Is a triangular number but not a square";
+        } else if (num.isSquare()) {
+            message = "Is a square number but not triangular";
+        } else {
+            message = "Neither a square nor a triangular number";
+        }
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
