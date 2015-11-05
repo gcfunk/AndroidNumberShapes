@@ -34,18 +34,23 @@ public class MainActivity extends ActionBarActivity {
     public void testNumber(View view) {
         EditText userNumber = (EditText) findViewById(R.id.userNumber);
 
-        Number num = new Number();
-        num.number = Integer.parseInt(userNumber.getText().toString());
-
         String message = "";
-        if (num.isTriangular() && num.isSquare()) {
-            message = "Both a square and a triangular number";
-        } else if (num.isTriangular()) {
-            message = "Is a triangular number but not a square";
-        } else if (num.isSquare()) {
-            message = "Is a square number but not triangular";
+        if (userNumber.getText().toString().isEmpty()) {
+            message = "Please enter a number";
         } else {
-            message = "Neither a square nor a triangular number";
+
+            Number num = new Number();
+            num.number = Integer.parseInt(userNumber.getText().toString());
+
+            if (num.isTriangular() && num.isSquare()) {
+                message = "Both a square and a triangular number";
+            } else if (num.isTriangular()) {
+                message = "Is a triangular number but not a square";
+            } else if (num.isSquare()) {
+                message = "Is a square number but not triangular";
+            } else {
+                message = "Neither a square nor a triangular number";
+            }
         }
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
